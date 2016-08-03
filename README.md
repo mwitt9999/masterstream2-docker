@@ -65,7 +65,6 @@
            $ composer install
            $ sf doctrine:database:create
            $ sf doctrine:schema:update --force
-           $ sf doctrine:fixtures:load --no-interaction
            ```
       
    ## Usage
