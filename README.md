@@ -61,12 +61,11 @@
        3. Composer install & create database
    
            ```bash
-           $ docker-compose exec php bash
+           $ docker-compose exec -t -i masterstream2-php /bin/bash
            $ composer install
-           # Symfony3
-           $ sf3 doctrine:database:create
-           $ sf3 doctrine:schema:update --force
-           $ sf3 doctrine:fixtures:load --no-interaction
+           $ sf doctrine:database:create
+           $ sf doctrine:schema:update --force
+           $ sf doctrine:fixtures:load --no-interaction
            ```
       
    ## Usage
