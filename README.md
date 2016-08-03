@@ -1,8 +1,8 @@
-   # Docker Implementation for Masterstream 2.0 (using symfony3)
+   #Docker Implementation for Masterstream 2.0 (using symfony3)
     
-   ### Teck Stack: Nginx - MySQL - PHP7.0-FPM - Redis - ELK (Elasticsearch, Logstash, Kibana)
+   ###Teck Stack: Nginx - MySQL - PHP7.0-FPM - Redis - ELK (Elasticsearch, Logstash, Kibana)
    
-   ## Installation
+   ##Installation
    
    1. Retrieve git project
    
