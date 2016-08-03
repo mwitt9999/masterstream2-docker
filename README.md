@@ -94,11 +94,11 @@
    $ docker-compose ps
               Name                          Command               State              Ports            
    --------------------------------------------------------------------------------------------------
-   dockersymfony_db_1            /entrypoint.sh mysqld            Up      0.0.0.0:3306->3306/tcp      
-   dockersymfony_elk_1           /usr/bin/supervisord -n -c ...   Up      0.0.0.0:81->80/tcp          
-   dockersymfony_nginx_1         nginx                            Up      443/tcp, 0.0.0.0:80->80/tcp
-   dockersymfony_php_1           php-fpm                          Up      0.0.0.0:9000->9000/tcp      
-   dockersymfony_redis_1         /entrypoint.sh redis-server      Up      0.0.0.0:6379->6379/tcp      
+   masterstream2_db_1            /entrypoint.sh mysqld            Up      0.0.0.0:3306->3306/tcp      
+   masterstream2_elk_1           /usr/bin/supervisord -n -c ...   Up      0.0.0.0:81->80/tcp          
+   masterstream2_nginx_1         nginx                            Up      443/tcp, 0.0.0.0:80->80/tcp
+   masterstream2_php_1           php-fpm                          Up      0.0.0.0:9000->9000/tcp      
+   masterstream2_redis_1         /entrypoint.sh redis-server      Up      0.0.0.0:6379->6379/tcp      
    ```
    
    ## Useful commands
