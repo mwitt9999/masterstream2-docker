@@ -17,7 +17,7 @@ services:
         build: php7-fpm
         container_name: masterstream2-php
         ports:
-            - 9000:9000
+            - 9001:9000
         links:
             - db:mysqldb
             - redis
@@ -27,7 +27,7 @@ services:
     nginx:
         build: nginx
         container_name: masterstream2-nginx
-        ports:gi
+        ports:
             - 80:80
         links:
             - php
