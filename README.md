@@ -1,8 +1,10 @@
-   #Docker Implementation for Masterstream 2.0 (using symfony3)
+# Docker Implementation for Masterstream 2.0 (using symfony3)
     
-   ###Teck Stack: Nginx - MySQL - PHP7.0-FPM - Redis - ELK (Elasticsearch, Logstash, Kibana)
+   Teck Stack: Nginx - MySQL - PHP7.0-FPM - Redis - ELK 
    
-   ##Installation
+   (Elasticsearch, Logstash, Kibana)
+
+## Installation
    
    1. Retrieve git project
    
@@ -26,12 +28,14 @@
        $ docker-compose up -d
        ```
    
-   4. Update your host file (add masterstream.dev)
+   4. Update your host file (add masterstream.dev && kibana.masterstream.dev)
    
        ```bash
        # get containers IP address and update host (replace IP according to your configuration)
        $ docker inspect --format '{{ .NetworkSettings.IPAddress }}' $(docker ps -f name=nginx -q)
+       
        # unix only (on Windows, edit C:\Windows\System32\drivers\etc\hosts)
+       
        $ sudo echo "171.17.0.1 masterstream.dev" >> /etc/hosts (for main masterstream app)
        $ sudo echo "171.17.0.1 kibana.masterstream.dev" >> /etc/hosts (for kibana GUI)
        
@@ -66,7 +70,9 @@
            $ sf doctrine:database:create
            $ sf doctrine:schema:update --force
            ```
-      
+   6. Copy .env.example from root of project to .env 
+       1. Make sure to update any config variables (defaults point to docker containers)
+       
    ## Usage
    
    Just run `docker-compose -d`, then:
@@ -98,6 +104,71 @@
    masterstream2_php_1           php-fpm                          Up      0.0.0.0:9000->9000/tcp      
    masterstream2_redis_1         /entrypoint.sh redis-server      Up      0.0.0.0:6379->6379/tcp      
    ```
+   
+   ## Redis Example 
+   (see documentation [Predis Github](https://github.com/nrk/predis))
+   
+   ```php 
+     use Predis; <---- import Predis
+     
+     $redisParams = [
+         'scheme' => 'tcp',
+         'host'   => getenv('REDIS_HOST'),  <---- Make sure to set .env variables (see .env.example)
+         'port'   => getenv('REDIS_PORT'),
+     ];
+    
+     try {
+         $client = new Predis\Client($redisParams);
+         $client->connect();
+     } catch(Predis\Connection\ConnectionException $e) {
+         echo $e->getMessage();
+     }
+    
+     $client->set('key', 'value');
+     $key = $client->get('key');
+    
+     return $key;
+     
+   ```
+
+   
+  ## ElasticSearch Example 
+  (see documentation @ [ElasticSearch PHP Github](https://github.com/elastic/elasticsearch-php))
+  
+  ```php 
+        $esHost = getenv('ELASTICSEARCH_HOST');
+        $esPort = getenv('ELASTICSEARCH_PORT');
+
+        $host = [
+            $esHost.':'.$esPort
+        ];
+
+        $client = ClientBuilder::create()->setHosts($host)->build();
+
+        $params = [
+            'index' => 'brand_new',
+            'body' => [
+                'settings' => [
+                    'number_of_shards' => 2,
+                    'number_of_replicas' => 0
+                ]
+            ]
+        ];
+
+        $response = $client->indices()->create($params);
+
+        $params = [
+            'index' => 'test',
+            'type' => 'test_type',
+            'id' => 'test_id',
+            'body' => ['testField' => 'testValue']
+        ];
+
+        $response = $client->index($params);
+
+        return $response;
+    
+  ```
    
    ## Useful commands
    

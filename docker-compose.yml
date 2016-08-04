@@ -36,13 +36,13 @@ services:
         volumes:
             - ./logs/nginx/:/var/log/nginx
     elk:
-        image: willdurand/elk
+        build: elk #sebp/elk
         container_name: masterstream2-elk
         ports:
-            - 81:80
-        volumes:
-            - ./elk/logstash:/etc/logstash
-            - ./elk/logstash/patterns:/opt/logstash/patterns
+          - "5601:5601"
+          - "9200:9200"
+          - "5044:5044"
+          - "5000:5000"
         volumes_from:
-            - php
-            - nginx
+          - php
+          - nginx
