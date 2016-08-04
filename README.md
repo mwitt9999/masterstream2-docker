@@ -78,8 +78,8 @@
    Just run `docker-compose -d`, then:
    
    * Masterstream app: visit [masterstream.dev](http://masterstream.dev)  
-   * Masterstream dev mode: visit [masterstream.dev/app_dev.php](http://symfony.dev/app_dev.php)  
-   * (Kibana): [kibana.masterstream.dev](http://kibana.masterstream.dev)
+   * (Kibana): [kibana.masterstream.dev](http://kibana.masterstream.dev:5601)
+   * (Elasticsearch): [kibana.masterstream.dev](http://kibana.masterstream.dev:9200)
    * Logs (files location): logs/nginx and logs/masterstream
    
    ## How it works?
