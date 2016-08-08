@@ -28,7 +28,7 @@ services:
         build: nginx
         container_name: masterstream2-nginx
         ports:
-            - 80:80
+            - 81:80
         links:
             - php
         volumes_from:

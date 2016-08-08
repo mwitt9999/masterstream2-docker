@@ -146,7 +146,7 @@
         $client = ClientBuilder::create()->setHosts($host)->build();
 
         $params = [
-            'index' => 'brand_new',
+            'index' => 'test',
             'body' => [
                 'settings' => [
                     'number_of_shards' => 2,
